@@ -8,7 +8,7 @@ pipeline {
     stages{
         stage('Install dempendencies'){
             steps{
-                sh 'pacman -Sy --noconfirm cmake base-devel'
+                sh 'pacman -Sy --noconfirm cmake base-devel doxygen'
             }
         }
         stage('Configure CMake project'){
