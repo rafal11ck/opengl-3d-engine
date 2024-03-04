@@ -6,8 +6,9 @@ pipeline {
     }
     stages{
         stage('Install dependencies'){
-            sh 'pwd'
-            sh 'ls'
-        }
+            steps{
+                sh 'pwd'
+                sh 'ls'
+            }
     }
 }
