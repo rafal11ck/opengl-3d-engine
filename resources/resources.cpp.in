@@ -1,0 +1,10 @@
+
+#include <string>
+
+// clang-format off
+
+#define RESOURCES_PATH "@CMAKE_CURRENT_SOURCE_DIR@/"
+
+// clang-format on
+
+std::string getResourcesPath() { return {RESOURCES_PATH}; }
