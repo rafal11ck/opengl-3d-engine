@@ -4,8 +4,8 @@ pipeline {
             image 'archlinux'
         }
     }
-    stages('Install dependencies'){
-        stage{
+    stages{
+        stage('Install dependencies'){
             sh 'pwd'
             sh 'ls'
         }
