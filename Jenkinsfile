@@ -6,6 +6,11 @@ pipeline {
         }
     }
     stages{
+        stage('Install dempendencies'){
+            steps{
+                sh 'pacman -Sy cmake'
+            }
+        }
         stage('Configure CMake project'){
             steps{
                 sh 'cmake -B build/'
