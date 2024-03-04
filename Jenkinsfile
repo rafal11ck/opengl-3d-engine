@@ -8,12 +8,12 @@ pipeline {
     stages{
         stage('Configure CMake project'){
             steps{
-                sh cmake -B build/
+                sh 'cmake -B build/'
             }
         }
         stage('Compile'){
             steps{
-                sh cmake --build build/ -j
+                sh 'cmake --build build/ -j'
             }
         }
     }
