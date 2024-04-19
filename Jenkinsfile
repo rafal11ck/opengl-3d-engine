@@ -18,6 +18,7 @@ pipeline {
         }
         stage('Compile'){
             steps{
+                sh 'cmake --build build/ -t clean'
                 sh 'cmake --build build/ -j'
             }
         }
