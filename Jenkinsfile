@@ -8,7 +8,7 @@ pipeline {
     stages{
         stage('Install dempendencies'){
             steps{
-                sh 'pacman -Sy --noconfirm cmake base-devel doxygen graphviz git glew sfml glm stb gsfonts'
+                sh 'pacman -Sy --noconfirm cmake base-devel doxygen graphviz git glew sfml glm stb'
             }
         }
         stage('Configure CMake project'){
