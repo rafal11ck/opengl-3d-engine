@@ -5,21 +5,13 @@
 
 #include "drawable.hpp"
 #include "elementBuffer.hpp"
-#include "log.hpp"
-#include "moveable.hpp"
-#include "rotatable.hpp"
 #include "shader.hpp"
-#include "texture.hpp"
 #include "vertexArray.hpp"
 #include "vertexBuffer.hpp"
 #include <GL/glew.h>
 #include <netdb.h>
-/// @brief Basic Mesh Class 
+/// @brief Basic Mesh Class
 class BasicMesh : public Drawable {
-  /// @brief no copy operations
-  BasicMesh(BasicMesh &) = delete;
-  /// @brief no move operations
-  BasicMesh(BasicMesh &&) = delete;
 
 public:
   /// @brief Vertex alias
@@ -56,9 +48,15 @@ protected:
 public:
   /// @brief Constructor
   BasicMesh();
+
+  BasicMesh(const BasicMesh &) = delete;
+  BasicMesh(BasicMesh &&) = default;
+  BasicMesh &operator=(const BasicMesh &) = delete;
+  BasicMesh &operator=(BasicMesh &&) = default;
+
   /// @brief Constructor
   BasicMesh(verticies_t veritices, indicies_t indicies);
-  
+
   /// @brief Destructor
   ~BasicMesh();
 

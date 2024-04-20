@@ -2,6 +2,7 @@
 #define SHAPE_HPP_
 
 #include "basicMesh.hpp"
+#include "moveable.hpp"
 #include "rotatable.hpp"
 #include "scaleable.hpp"
 #include "texture.hpp"
@@ -27,7 +28,7 @@ public:
   /// @brief Model Matrix getter
   virtual glm::mat4 getModelMatrix() override;
 
-  /// @brief Draws shader for the shape 
+  /// @brief Draws shader for the shape
   virtual void draw(Shader &shader) override;
 
   /// @brief Destructor

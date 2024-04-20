@@ -1,7 +1,6 @@
 #ifndef DRAWABLE_HPP_
 #define DRAWABLE_HPP_
 
-#include "log.hpp"
 #include "shader.hpp"
 
 /**
