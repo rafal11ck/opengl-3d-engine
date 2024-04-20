@@ -15,7 +15,7 @@ Shape::Shape(verticies_t verticies, indicies_t indicies, Texture textureDiffuse,
 }
 
 glm::mat4 Shape::getModelMatrix() {
-  LOGTRACEN;
+  // LOGTRACEN;
 
   glm::mat4 model{1};
 

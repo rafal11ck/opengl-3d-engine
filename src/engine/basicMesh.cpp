@@ -45,7 +45,7 @@ BasicMesh::BasicMesh(verticies_t veritices, indicies_t indicies) {
 BasicMesh::~BasicMesh() { delete m_VAO; }
 
 void BasicMesh::draw(Shader &shader) {
-  LOGTRACEN;
+  // LOGTRACEN;
   shader.use();
   shader.setInt("material.diffuse", 0);
   shader.setInt("material.specular", 1);
