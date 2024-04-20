@@ -14,6 +14,11 @@ class Shape : public BasicMesh,
               public virtual Scalable {
 
 public:
+  Shape(const Shape &) = delete;
+  Shape(Shape &&) = default;
+  Shape &operator=(const Shape &) = delete;
+  Shape &operator=(Shape &&) = default;
+
   /// @brief Constructor
   /// @param verticies The verticies of the shape
   /// @param indicies The indicies of the shape

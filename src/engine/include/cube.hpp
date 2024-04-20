@@ -18,6 +18,11 @@ public:
   /// @param textureSpecular Thee Specular lighting texture
   Cube(Texture textureDiffuse = Texture{Texture::TextureType::diffuse},
        Texture textureSpecular = Texture{Texture::TextureType::specular});
+
+  Cube(const Cube &) = delete;
+  Cube(Cube &&) = default;
+  Cube &operator=(const Cube &) = delete;
+  Cube &operator=(Cube &&) = default;
 };
 
 #endif // CUBE_HPP_
