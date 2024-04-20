@@ -9,6 +9,7 @@
 #include "cube.hpp"
 #include "engine.hpp"
 #include "light.hpp"
+#include "log.hpp"
 #include "resources.hpp"
 #include "sphere.hpp"
 #include "texture.hpp"
