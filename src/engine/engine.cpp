@@ -315,7 +315,7 @@ void Engine::handleCameraKeyboard() {
 };
 
 void Engine::updateShaderLights(Shader &shader) const {
-  LOGTRACEN;
+  // LOGTRACEN;
 
   shader.setInt("LightsCount", m_lights.size());
 
