@@ -11,7 +11,7 @@
 #include <GL/glew.h>
 #include <netdb.h>
 /// @brief Basic Mesh Class
-class BasicMesh : public Drawable {
+class BasicMesh : public virtual Drawable {
 
 public:
   /// @brief Vertex alias
