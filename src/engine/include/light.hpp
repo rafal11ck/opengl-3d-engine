@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 
 /// @brief Light class
-class Light : public Movable {
+class Light : virtual public Movable {
 private:
   /// @brief Ambient light vector
   glm::vec3 ambient{0};
