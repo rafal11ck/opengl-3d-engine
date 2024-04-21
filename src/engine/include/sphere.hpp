@@ -30,6 +30,11 @@ public:
          unsigned int sectorCount = defaultSectorCount,
          unsigned int stackCount = defaultStackCount);
 
+  Sphere(const Sphere &) = delete;
+  Sphere(Sphere &&) = default;
+  Sphere &operator=(const Sphere &) = delete;
+  Sphere &operator=(Sphere &&) = default;
+
 private:
   /// @brief Radius of the sphere
   float m_radius;
