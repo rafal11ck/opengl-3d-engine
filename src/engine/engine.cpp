@@ -334,3 +334,5 @@ void Engine::updateShaderLights(Shader &shader) const {
     dumbLight.update(shader, idx);
   }
 }
+
+void Engine::setClearColor(glm::vec4 color) { m_clearColor = color; };
