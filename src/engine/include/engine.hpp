@@ -50,7 +50,7 @@ public:
   /// @brief Maximum number of lights handled by the engine
   static const unsigned int s_maxlightcount;
 
-  /// @brief Engine instance getter 
+  /// @brief Engine instance getter
   static Engine &getInstance();
 
   /// @brief Last frame duration getter
@@ -152,13 +152,14 @@ public:
   /// @param projectionType projection type to be set
   void setProjectionType(ProjectionType projectionType);
 
-
   /// @brief Moves mouse to the center of the window
   void moveMouseToCenterOfWindow();
-  
+
   /// @brief WireframeMode setter
   /// @param enabled true or false
   void setWireframeMode(bool enabled);
+
+  void setClearColor(glm::vec4 color);
 
 private:
   /// @brief Engine instance pointer
@@ -215,6 +216,11 @@ private:
 
   /// @brief Projection type
   ProjectionType m_projectionType{ProjectionType::orthogonal};
+
+  /**
+   * @brief Color of blank screen each frame.
+   **/
+  glm::vec4 m_clearColor{0, 0, 0, 1};
 
 private:
   /// @brief Constructor
