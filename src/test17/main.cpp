@@ -2,33 +2,40 @@
  *@file
  *@brief Rendering text
  **/
-#include <freetype2/ft2build.h>
-
-#include FT_FREETYPE_H
-#include <freetype2/freetype/freetype.h>
-
 #include "engine.hpp"
+
+// #define GLT_MANUAL_VIEWPORT
+#define GLT_IMPLEMENTATION
+#include "gltext.h"
 
 /// engine reference
 Engine &engine{Engine::getInstance()};
 
 int main() {
+  // Initialize glText
+  gltInit();
 
-  Shader shader{Shader("text_vs.glsl", "text_f.glsl")};
+  // Creating text
+  GLTtext *text = gltCreateText();
+  gltSetText(text, "Hello World!");
 
-  FT_Library ft;
-  if (FT_Init_FreeType(&ft)) {
-    std::cout << "ERROR::FREETYPE: Could not init FreeType Library"
-              << std::endl;
-    return -1;
-  }
+  engine.setLoopFunction([&]() {
+    // Begin text drawing (this for instance calls glUseProgram)
+    gltBeginDraw();
 
-  FT_Face face;
-  if (FT_New_Face(ft, "font.ttf", 0, &face)) {
-    std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-    return -1;
-  }
+    // Draw any amount of text between begin and end
+    gltColor(1.0f, 1.0f, 1.0f, 1.0f);
+    gltDrawText2D(text, 40, 40, 1.0);
 
+    // Finish drawing text
+    gltEndDraw();
+  });
   /// activate loop
   engine.loop();
+
+  // Deleting text
+  gltDeleteText(text);
+
+  // Destroy glText
+  gltTerminate();
 }
