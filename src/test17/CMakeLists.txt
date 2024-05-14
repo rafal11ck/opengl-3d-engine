@@ -12,5 +12,8 @@ if(NOT gl_text_POPULATED)
     target_include_directories(gl_text INTERFACE ${gl_text_SOURCE_DIR})
 endif()
 
+
+set(CMAKE_CXX_STANDARD_REQUIRED 23)
+set(CMAKE_CXX_STANDARD 23)
 add_executable(test17 main.cpp gl_text.cpp)
 target_link_libraries(test17 engine gl_text)
