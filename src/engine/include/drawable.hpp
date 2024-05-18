@@ -12,6 +12,13 @@ class Drawable {
   float shininess;
 
 public:
+  Drawable(const Drawable &) = delete;
+  Drawable(Drawable &&) = default;
+  Drawable &operator=(const Drawable &) = delete;
+  Drawable &operator=(Drawable &&) = default;
+
+  Drawable() = default;
+
   /// @brief Virtual method to draw a drawable
   /// @param shader Shader for the drawable
   virtual void draw(Shader &shader) = 0;
