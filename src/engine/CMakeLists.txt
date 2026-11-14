@@ -6,7 +6,8 @@ include(FetchContent)
 FetchContent_Declare(
   SFML
   GIT_REPOSITORY https://github.com/SFML/SFML.git
-  GIT_TAG 2.6.x)
+  GIT_TAG 2.6.x
+  FIND_PACKAGE_ARGS 2.6 COMPONENTS graphics window system)
 FetchContent_MakeAvailable(SFML)
 
 if(WIN32)
@@ -30,7 +31,10 @@ link_libraries(${GLEW_LIBRARIES})
 find_package(glm REQUIRED)
 
 # stb System has to have STB installed
-include_directories(/usr/include/stb REQUIRED)
+find_path(STB_INCLUDE_DIR stb_image.h PATH_SUFFIXES stb REQUIRED)
+include_directories(${STB_INCLUDE_DIR})
+
+find_package(OpenGL REQUIRED)
 
 # file(COPY resources DESTINATION resources)
 
@@ -83,7 +87,7 @@ add_library(
   ${CMAKE_BINARY_DIR}/generated/resources.cpp)
 
 target_include_directories(engine PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include")
-target_link_libraries(engine ${OPENGL_gl_LIBRARY})
+target_link_libraries(engine OpenGL::GL)
 target_link_libraries(engine glm)
 target_link_libraries(engine ${GLEW_LIBRARIES})
 target_link_libraries(engine sfml-graphics)
