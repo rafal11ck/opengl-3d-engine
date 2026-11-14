@@ -39,14 +39,6 @@ public:
    *@brief Distance to far clipping plane from camera.*/
   static constexpr float s_clippingPlaneFar{100};
 
-  /// @brief Default path to shader directory
-  static const std::string s_defaultShaderDir;
-
-  /// @brief Default path to vertex shader code
-  static const std::string s_defaultShaderPathVertex;
-  /// @brief Default path to fragment shader code
-  static const std::string s_defaultShaderPathFragment;
-
   /// @brief Maximum number of lights handled by the engine
   static const unsigned int s_maxlightcount;
 

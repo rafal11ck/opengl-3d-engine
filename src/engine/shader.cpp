@@ -25,13 +25,12 @@ std::string Shader::loadShaderFromFile(const char *path) {
 }
 
 unsigned int Shader::createShader(const char *path, ShaderType type) {
-  GLuint shader;
-
   std::string file = loadShaderFromFile(path);
-  const char *code = file.c_str();
+  return compileShader(file.c_str(), type);
+}
 
-  if (code == nullptr)
-    return false;
+GLuint Shader::compileShader(const char *code, ShaderType type) {
+  GLuint shader;
 
   if (type == VERTEX) {
     shader = glCreateShader(GL_VERTEX_SHADER);
@@ -92,6 +91,14 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) {
 
 Shader::Shader(const std::string vertexPath, const std::string fragmentPath)
     : Shader(vertexPath.c_str(), fragmentPath.c_str()) {}
+
+Shader Shader::fromSource(const char *vertexCode, const char *fragmentCode) {
+  Shader shader;
+  shader.vertexShader = shader.compileShader(vertexCode, VERTEX);
+  shader.fragmentShader = shader.compileShader(fragmentCode, FRAGMENT);
+  shader.id = shader.createProgram();
+  return shader;
+}
 
 void Shader::use() { glUseProgram(id); }
 

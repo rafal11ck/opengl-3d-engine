@@ -1,10 +1,9 @@
 #include "include/texture.hpp"
 #include "log.hpp"
-#include "resources.hpp"
-#include <stb/stb_image.h>
-
-const std::string Texture::defaultTexturePath{getResourcesPath() +
-                                              "/textures/default.png"};
+#include <fstream>
+#include <iterator>
+#include <stb_image.h>
+#include <vector>
 
 GLenum Texture::getTextureTypeUnit(const TextureType type) {
   switch (type) {
@@ -30,7 +29,23 @@ void Texture::unBind() {
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Texture::Texture(TextureType type, const std::string path) : m_type(type) {
+static constexpr unsigned char defaultTexture[] = {
+#embed "../../resources/textures/default.png"
+};
+
+Texture::Texture(TextureType type) : Texture(type, defaultTexture) {}
+
+Texture::Texture(TextureType type, const std::string path)
+    : Texture(type, [&] {
+        std::ifstream file(path, std::ios::binary);
+        if (!file)
+          LOGERROR << "Failed to open texture " << path << "\n";
+        return std::vector<unsigned char>(std::istreambuf_iterator<char>(file),
+                                          {});
+      }()) {}
+
+Texture::Texture(TextureType type, std::span<const unsigned char> image)
+    : m_type(type) {
 
   stbi_set_flip_vertically_on_load(true);
 
@@ -49,11 +64,12 @@ Texture::Texture(TextureType type, const std::string path) : m_type(type) {
   // load image, create texture and generate mipmaps
   int width, height, nrChannels;
   unsigned char *data =
-      stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+      stbi_load_from_memory(image.data(), image.size(), &width, &height,
+                            &nrChannels, 0);
 
   if (data) {
 
-    LOGINFO << path << " has " << nrChannels << " chanels\n";
+    LOGINFO << "Texture has " << nrChannels << " chanels\n";
     GLenum format;
     switch (nrChannels) {
     case 3:
@@ -74,7 +90,7 @@ Texture::Texture(TextureType type, const std::string path) : m_type(type) {
                  GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
   } else {
-    LOGERROR << "Failed to load texture from " << path << "\n";
+    LOGERROR << "Failed to load texture\n";
   }
   stbi_image_free(data);
 }

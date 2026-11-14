@@ -6,7 +6,6 @@
 #include <GL/glew.h>
 
 #include "engine.hpp"
-#include "resources.hpp"
 #include "shader.hpp"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -17,13 +16,13 @@
 
 Engine *Engine::s_instance{nullptr};
 
-const std::string Engine::s_defaultShaderDir{getResourcesPath() + "/shaders/"};
+static constexpr char defaultVertexShader[] = {
+#embed "../../resources/shaders/vertex.glsl"
+    , 0};
 
-const std::string Engine::s_defaultShaderPathVertex{s_defaultShaderDir +
-                                                    "vertex.glsl"};
-
-const std::string Engine::s_defaultShaderPathFragment{s_defaultShaderDir +
-                                                      "/fragment.glsl"};
+static constexpr char defaultFragmentShader[] = {
+#embed "../../resources/shaders/fragment.glsl"
+    , 0};
 
 const unsigned int Engine::s_maxlightcount{8};
 
@@ -191,10 +190,8 @@ Engine::Engine() {
   buildWindow();
 
   LOGINFO << "Compiling default shader.\n";
-  std::string shaderDir{getResourcesPath() + "/shaders/"};
-
-  m_defaultShader =
-      new Shader(s_defaultShaderPathVertex, s_defaultShaderPathFragment);
+  m_defaultShader = new Shader(
+      Shader::fromSource(defaultVertexShader, defaultFragmentShader));
 
   m_defaultShader->use();
   m_defaultShader->setMat4("view", glm::mat4{1});

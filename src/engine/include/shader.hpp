@@ -32,6 +32,8 @@ private:
   /// @param type shader type
   /// @return returns a non-zero value by which it can be referenced 
   GLuint createShader(const char *path, ShaderType type);
+  /// @brief Creates a shader from source code
+  GLuint compileShader(const char *code, ShaderType type);
   /// @brief Creates a program
   /// @return returns a non-zero value by which it can be referenced
   GLuint createProgram();
@@ -39,6 +41,8 @@ private:
   /// @param program program to be checked
   /// @param exceptionType exception type
   void checkForException(GLuint program, Exception exceptionType);
+
+  Shader() = default;
 
 public:
   /// @brief Constructor
@@ -49,6 +53,8 @@ public:
   /// @param vertexPath path to vertex shader
   /// @param fragmentPath path to fragment shader
   Shader(const std::string vertexPath, const std::string fragmentPath);
+  /// @brief Creates shader from source code
+  static Shader fromSource(const char *vertexCode, const char *fragmentCode);
 
   /// @brief Installs the program object specified by id as part of current rendering state
   void use();

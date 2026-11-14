@@ -2,6 +2,7 @@
 #define TEXTURE_HPP_
 
 #include <GL/glew.h>
+#include <span>
 #include <string>
 
 /**
@@ -17,9 +18,6 @@ class Texture {
 public:
   /// @brief TextureType aliases
   enum class TextureType { diffuse, specular };
-
-  /// @brief The default path to the texture
-  static const std::string defaultTexturePath;
 
 private:
   TextureType m_type;
@@ -41,6 +39,12 @@ public:
    * @brief Constructor
    * Only PNG / jpeg tested
   */
-  Texture(TextureType type, const std::string path = defaultTexturePath);
+  Texture(TextureType type, const std::string path);
+
+  /// @brief Default texture
+  Texture(TextureType type);
+
+  /// @brief Loads texture from image file contents in memory
+  Texture(TextureType type, std::span<const unsigned char> image);
 };
 #endif // TEXTURE_HPP_
